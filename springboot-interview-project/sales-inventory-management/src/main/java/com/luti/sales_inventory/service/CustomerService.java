@@ -1,5 +1,6 @@
 package com.luti.sales_inventory.service;
 
+import com.luti.sales_inventory.exception.CustomerAlreadyExistsException;
 import com.luti.sales_inventory.model.Customer;
 import com.luti.sales_inventory.repository.CustomerRepository;
 import com.luti.sales_inventory.request.CreateCustomerRequest;
@@ -15,8 +16,14 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer createCustomer(CreateCustomerRequest request){
+    public Customer createCustomer(CreateCustomerRequest request) throws CustomerAlreadyExistsException {
         Customer customer = new Customer();
+        if(
+                customerRepository.findByName(request.getName()).isPresent()
+        ){
+          throw new CustomerAlreadyExistsException();
+        }
+
         customer.setName(request.getName());
         customer.setPhonenumber(request.getPhonenumber());
         customerRepository.save(customer);
