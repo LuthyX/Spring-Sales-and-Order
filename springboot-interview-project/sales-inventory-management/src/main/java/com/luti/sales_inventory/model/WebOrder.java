@@ -1,42 +1,29 @@
 package com.luti.sales_inventory.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
-@Getter
-@Setter
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WebOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
-    private Customer customer;
-
-    @ManyToOne(cascade = CascadeType.ALL
-    )
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
-    //    @JsonIgnore
-//    private Long product_id;
-    private LocalDate ordered_date;
-
+    private Long customer_id;
+    private Long product_id;
     private Double amount;
     private Integer quantity;
+    private LocalDate date;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "WebOrder{" +
+                "customer_id=" + customer_id +
+                ", product_id=" + product_id +
+                ", amount=" + amount +
+                ", quantity=" + quantity +
+                ", date=" + date +
+                '}';
     }
 }
