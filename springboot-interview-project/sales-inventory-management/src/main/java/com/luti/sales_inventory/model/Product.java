@@ -1,12 +1,11 @@
 package com.luti.sales_inventory.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -20,8 +19,8 @@ public class Product {
     private Double price;
     private Integer inStock;
 
-    @OneToMany
-    @JsonIgnore
-    private List<WebOrder> orders = new ArrayList<>();
+//    @OneToMany
+//    @JsonIgnore
+//    private List<WebOrder> orders = new ArrayList<>();
 
 }
