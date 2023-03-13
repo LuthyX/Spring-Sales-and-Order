@@ -24,8 +24,7 @@ public class OrderReportController {
         this.reportService = reportService;
     }
 
-    //TODO
-    // private ResponseEntity<?> getAllOrders(){}
+
 
     @PostMapping()
     private ResponseEntity<?>getOrderReport(@RequestBody ReportRequest request){
