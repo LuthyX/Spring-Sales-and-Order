@@ -1,5 +1,6 @@
 package com.luti.sales_inventory.controllers;
 
+import com.luti.sales_inventory.exception.CustomerAlreadyExistsException;
 import com.luti.sales_inventory.model.Customer;
 import com.luti.sales_inventory.request.CreateCustomerRequest;
 import com.luti.sales_inventory.response.BaseResponse;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
     private final static String CUSTOMER_CREATED = "Customer successfully created";
+    private final static String CUSTOMER_ALREADY_EXISTS = "Customer Already exists, try another name";
 
     private CustomerService customerService;
 
@@ -34,10 +36,17 @@ public class CustomerController {
     }
     private ResponseEntity<BaseResponse> createCustomer(@RequestBody CreateCustomerRequest request){
         BaseResponse response = new BaseResponse();
-        Customer customer = customerService.createCustomer(request);
-        response.setSuccess(true);
-        response.setData(customer);
-        response.setMsg(CUSTOMER_CREATED);
-        return ResponseEntity.status(201).body(response);
+        try{
+            Customer customer = customerService.createCustomer(request);
+            response.setSuccess(true);
+            response.setData(customer);
+            response.setMsg(CUSTOMER_CREATED);
+            return ResponseEntity.status(201).body(response);
+        }
+        catch (CustomerAlreadyExistsException e){
+            response.setSuccess(false);
+            response.setMsg(CUSTOMER_ALREADY_EXISTS);
+            return ResponseEntity.status(409).body(response);
+        }
     }
 }
