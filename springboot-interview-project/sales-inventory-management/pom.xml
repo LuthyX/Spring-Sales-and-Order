@@ -8,7 +8,7 @@
         <artifactId>springboot-interview-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
+    <packaging>war</packaging>
     <artifactId>sales-inventory-management</artifactId>
 
     <properties>
