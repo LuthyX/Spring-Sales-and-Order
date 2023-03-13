@@ -1,12 +1,11 @@
 package com.luti.sales_inventory.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -19,7 +18,7 @@ public class Customer {
     private String name;
     private String phonenumber;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "customer")
-    private List<WebOrder> orders = new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "customer")
+//    private List<WebOrder> orders = new ArrayList<>();
 }
